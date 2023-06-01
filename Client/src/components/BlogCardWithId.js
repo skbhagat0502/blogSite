@@ -12,10 +12,8 @@ import { Box, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import classes from "../css/BlogCard.module.css";
-import Button from "../UI/Button";
-import { NavLink } from "react-router-dom";
 
-export default function BlogCard({
+export default function BlogCardWithId({
   title,
   description,
   image,
@@ -102,11 +100,8 @@ export default function BlogCard({
           {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {description.substring(0, 200) + "..."}
+          {description}
         </Typography>
-        <NavLink to={`/blog/${id}`}>
-          <Button className="dark mrt">Read More</Button>
-        </NavLink>
       </CardContent>
       {isUser && (
         <Box display={"flex"}>

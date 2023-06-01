@@ -1,0 +1,53 @@
+.option-container {
+  width: 80%;
+  max-width: 400px;
+  margin: 1rem auto;
+  background-color: var(--second-color); /* White */
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  z-index: 2;
+}
+
+.option-input {
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  background-color: transparent;
+  color: var(--primary-font-color); /* Dark gray */
+  font-size: 16px;
+  outline: none; /* Remove the default input outline */
+}
+
+.option-input:focus {
+  outline: none; /* Remove the default input focus outline */
+}
+@media (max-width: 768px) {
+  .option-container {
+    position: static;
+    width: auto;
+    margin: 0;
+    transform: none;
+  }
+}
+@media (max-width: 576px) {
+  .option-container {
+    width: 90%;
+    max-width: 300px;
+  }
+
+  .option-input {
+    font-size: 14px;
+  }
+}
+@media (max-width: 480px) {
+  .option-container {
+    width: 90%;
+    max-width: 280px;
+  }
+
+  .option-input {
+    font-size: 12px;
+    padding: 0.4rem;
+  }
+}

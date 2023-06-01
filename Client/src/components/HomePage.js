@@ -1,6 +1,4 @@
 import music from "../assets/music.jpg";
-import watch from "../assets/watch.jpg";
-import cat from "../assets/cat.jpg";
 import classes from "../css/HomePage.module.css";
 function HomePage() {
   return (

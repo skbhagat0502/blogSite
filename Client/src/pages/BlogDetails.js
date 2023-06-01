@@ -58,9 +58,6 @@ const BlogDetails = () => {
       console.log(error);
     }
   };
-
-  console.log(blog);
-
   return (
     <div className={styles.CreateBlog}>
       <form onSubmit={handleSubmit}>

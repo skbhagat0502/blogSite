@@ -8,9 +8,8 @@ import Button from "../UI/Button";
 
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
+
   const toggleMenu = () => setShowMenu((prevShowMenu) => !prevShowMenu);
-  const handleOptionChange = (event) => setSelectedOption(event.target.value);
 
   let isLogin =
     useSelector((state) => state.isLogin) || localStorage.getItem("userId");
@@ -21,7 +20,7 @@ function Navbar() {
     try {
       dispatch(authActions.logout());
       toast.success("Logout Successfully");
-      navigate("/login");
+      navigate("/");
       localStorage.clear();
     } catch (error) {
       console.log(error);
@@ -35,23 +34,7 @@ function Navbar() {
           <li className={classes.brand}>
             <NavLink to="/">SiteName</NavLink>
           </li>
-          <div className={classes["option-container"]}>
-            <select
-              className={classes["option-input"]}
-              value={selectedOption}
-              onChange={handleOptionChange}
-            >
-              <option value="">Select category</option>
-              <option value="news">NEWS</option>
-              <option value="politics">POLITICS</option>
-              <option value="entertainment">ENTERTAINMENT</option>
-              <option value="personal">PERSONAL</option>
-              <option value="life">LIFE</option>
-              <option value="voices">VOICES</option>
-              <option value="shopping">SHOPPING</option>
-              <option value="video">VIDEO</option>
-            </select>
-          </div>
+
           {!showMenu && (
             <span className={classes.box}>
               {isLogin ? (
@@ -104,12 +87,11 @@ function Navbar() {
           <li>
             <NavLink to="/shoping">SHOPPING</NavLink>
           </li>
-          <li>
-            <NavLink to="/video">VIDEO</NavLink>
-          </li>
-          <li>
-            <NavLink to="my-blogs">My Blogs</NavLink>
-          </li>
+          {isLogin && (
+            <li>
+              <NavLink to="my-blogs">My Blogs</NavLink>
+            </li>
+          )}
           {showMenu && (
             <span className={classes.buttonbox}>
               {isLogin ? (

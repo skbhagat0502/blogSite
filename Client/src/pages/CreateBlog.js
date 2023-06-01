@@ -2,8 +2,11 @@ import React, { useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styles from "../css/CreateBlog.module.css";
+import classes from "../css/Option.module.css";
 
 const CreateBlog = () => {
+  const [selectedOption, setSelectedOption] = useState("");
+  const handleOptionChange = (event) => setSelectedOption(event.target.value);
   const id = localStorage.getItem("userId");
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
@@ -42,8 +45,25 @@ const CreateBlog = () => {
     <div className={styles.CreateBlog}>
       <form onSubmit={handleSubmit}>
         <div className={styles.blogForm}>
-          <h2 className={styles.blogFormTitle}>Create A Blog</h2>
+          <h2 className={styles.blogFormTitle}>Share Your Experience</h2>
           <div className={styles.blogFormInput}>
+            <div className={classes["option-container"]}>
+              <select
+                className={classes["option-input"]}
+                value={selectedOption}
+                onChange={handleOptionChange}
+              >
+                <option value="">Select category</option>
+                <option value="news">NEWS</option>
+                <option value="politics">POLITICS</option>
+                <option value="entertainment">ENTERTAINMENT</option>
+                <option value="personal">PERSONAL</option>
+                <option value="life">LIFE</option>
+                <option value="voices">VOICES</option>
+                <option value="shopping">SHOPPING</option>
+                <option value="video">VIDEO</option>
+              </select>
+            </div>
             <label htmlFor="title">Title</label>
             <input
               type="text"

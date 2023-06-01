@@ -38,7 +38,7 @@ const Register = () => {
         localStorage.setItem("userId", data?.user._id);
         dispatch(authActions.login());
         toast.success("User Register Successfully");
-        navigate("/login");
+        navigate("/");
       } else {
         if (data.message === "This email address is already registered") {
           setError("This email address is already registered");

@@ -9,6 +9,7 @@ import UserBlogs from "./pages/UserBlogs";
 import CreateBlog from "./pages/CreateBlog";
 import BlogDetails from "./pages/BlogDetails";
 import { Toaster } from "react-hot-toast";
+import BlogWithId from "./pages/BlogWithId";
 
 function App() {
   return (
@@ -16,8 +17,17 @@ function App() {
       <Navbar />
       <Toaster />
       <Routes>
-        <Route exact path="/" element={<HomePage />} />
-        <Route exact path="/blogs" element={<Blogs />} />
+        <Route
+          exact
+          path="/"
+          element={
+            <>
+              <HomePage />
+              <Blogs />
+            </>
+          }
+        />
+        <Route path="/blog/:id" element={<BlogWithId />} />
         <Route path="/my-blogs" element={<UserBlogs />} />
         <Route path="/blog-details/:id" element={<BlogDetails />} />
         <Route path="/create-blog" element={<CreateBlog />} />
