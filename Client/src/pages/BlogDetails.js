@@ -3,7 +3,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "../css/CreateBlog.module.css";
-
+import Loading from "../components/Loading";
 const BlogDetails = () => {
   const [blog, setBlog] = useState({});
   const id = useParams().id;
