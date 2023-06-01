@@ -1,0 +1,48 @@
+.form-container {
+  max-width: 500px;
+  padding: 20px;
+  border-radius: 4px;
+  width: 500px;
+  min-width: 300px;
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+
+.form-field label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: var(--secondry-font-color);
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  color: var(--secondry-font-color);
+  outline: none;
+}
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: var(--hover-border-color);
+}
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  font-size: 1rem;
+}
+
+.form-field textarea {
+  resize: vertical;
+}
+
+.form-actions {
+  text-align: right;
+}
+@media screen and (max-width: 900px) {
+  .form-container {
+    padding: 0;
+  }
+}

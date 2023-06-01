@@ -1,0 +1,37 @@
+.blogCard {
+  width: 30%;
+  margin: 0.5rem auto;
+  padding: 2rem;
+  box-shadow: 5px 5px 10px #ccc;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.blogCard:hover {
+  box-shadow: 10px 10px 20px #ccc;
+}
+
+@media screen and (max-width: 1200px) {
+  .blogCard {
+    min-width: 350px;
+    width: 40%;
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+}
+@media screen and (max-width: 900px) {
+  .blogCard {
+    min-width: 350px;
+    width: 55%;
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .blogCard {
+    min-width: 350px;
+    width: 70%;
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+}

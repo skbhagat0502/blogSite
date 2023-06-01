@@ -1,0 +1,19 @@
+/* 
+<div className={classes.blogType}>
+<h1>Recent Blogs</h1>
+<div className={classes.blogSection}>
+  <div className={classes["blog-card"]}>
+    <img className={classes["blog-card__image"]} src={cat} alt="Blog" />
+    <div className={classes["blog-card__content"]}>
+      <h2 className={classes["blog-card__title"]}>Blog Title</h2>
+      <p className={classes["blog-card__paragraph"]}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+        gravida rutrum semper. Vestibulum ante ipsum primis in faucibus
+        orci luctus et ultrices posuere cubilia Curae; Donec euismod
+        luctus volutpat.
+      </p>
+      <Button className="dark">Read More</Button>
+    </div>
+  </div>
+</div>
+</div> */

@@ -1,0 +1,87 @@
+/* CSS for Login Section */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 125vh;
+}
+
+.welcomeSection {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.welcomeMessage {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.loginImage {
+  width: 300px;
+  border-radius: 50%;
+}
+
+.formSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.errorMessage {
+  color: red;
+  font-size: 14px;
+}
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .form {
+    width: 100%;
+  }
+
+  .loginImage {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .h3 {
+    font-size: 20px;
+  }
+  .container {
+    height: 100vh;
+  }
+}

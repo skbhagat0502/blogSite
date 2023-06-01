@@ -1,0 +1,7 @@
+.blogSection {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2rem auto;
+}
