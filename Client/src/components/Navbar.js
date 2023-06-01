@@ -5,8 +5,11 @@ import { authActions } from "../redux/store";
 import toast from "react-hot-toast";
 import classes from "../css/Navbar.module.css";
 import Button from "../UI/Button";
+import Overlay from "./Overlay";
 
 function Navbar() {
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [overlayMessage, setOverlayMessage] = useState("");
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => setShowMenu((prevShowMenu) => !prevShowMenu);
@@ -26,6 +29,10 @@ function Navbar() {
       console.log(error);
     }
   };
+  const handleOverlayToggle = (message) => {
+    setShowOverlay((prevShowOverlay) => !prevShowOverlay);
+    setOverlayMessage(message);
+  };
 
   return (
     <nav className={`${classes.navbar} ${showMenu ? classes.showMenu : ""}`}>
@@ -34,7 +41,6 @@ function Navbar() {
           <li className={classes.brand}>
             <NavLink to="/">SiteName</NavLink>
           </li>
-
           {!showMenu && (
             <span className={classes.box}>
               {isLogin ? (
@@ -48,7 +54,10 @@ function Navbar() {
               )}
               {isLogin ? (
                 <NavLink to="/">
-                  <Button className="dark" onClick={handleLogout}>
+                  <Button
+                    className="dark"
+                    onClick={() => handleOverlayToggle("logout")}
+                  >
                     Logout
                   </Button>
                 </NavLink>
@@ -67,45 +76,48 @@ function Navbar() {
         </ul>
         <ul className={classes.mainnav}>
           <li>
-            <NavLink to="/news">NEWS</NavLink>
+            <NavLink to="../news">NEWS</NavLink>
           </li>
           <li>
-            <NavLink to="/politics">POLITICS</NavLink>
+            <NavLink to="../politics">POLITICS</NavLink>
           </li>
           <li>
-            <NavLink to="/entertainment">ENTERTAINMENT</NavLink>
+            <NavLink to="../entertainment">ENTERTAINMENT</NavLink>
           </li>
           <li>
-            <NavLink to="/personal">PERSONAL</NavLink>
+            <NavLink to="../personal">PERSONAL</NavLink>
           </li>
           <li>
-            <NavLink to="/life">LIFE</NavLink>
+            <NavLink to="../life">LIFE</NavLink>
           </li>
           <li>
-            <NavLink to="/voices">VOICES</NavLink>
+            <NavLink to="../voices">VOICES</NavLink>
           </li>
           <li>
-            <NavLink to="/shoping">SHOPPING</NavLink>
+            <NavLink to="../shoping">SHOPPING</NavLink>
           </li>
           {isLogin && (
             <li>
-              <NavLink to="my-blogs">My Blogs</NavLink>
+              <NavLink to="../my-blogs">My Blogs</NavLink>
             </li>
           )}
           {showMenu && (
             <span className={classes.buttonbox}>
               {isLogin ? (
-                <NavLink to="/create-blog">
+                <NavLink to="../create-blog">
                   <Button className="lg">Create Blogs</Button>
                 </NavLink>
               ) : (
-                <NavLink to="/login">
+                <NavLink to="../login">
                   <Button className="lg">Log in</Button>
                 </NavLink>
               )}
               {isLogin ? (
                 <NavLink to="/">
-                  <Button className="dark" onClick={handleLogout}>
+                  <Button
+                    className="dark"
+                    onClick={() => handleOverlayToggle("logout")}
+                  >
                     Logout
                   </Button>
                 </NavLink>
@@ -118,6 +130,13 @@ function Navbar() {
           )}
         </ul>
       </>
+      {showOverlay && (
+        <Overlay
+          handleLogout={handleLogout}
+          handleOverlayToggle={handleOverlayToggle}
+          message={overlayMessage}
+        />
+      )}
     </nav>
   );
 }

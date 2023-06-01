@@ -42,7 +42,7 @@ function Footer() {
       </div>
       <div className={classes.impLinks}>
         <p>Copyright SiteName. All rights reserved.</p>
-        <p>Developed by Sandeep</p>
+        <p>Developed by Model Club 2021</p>
       </div>
     </footer>
   );

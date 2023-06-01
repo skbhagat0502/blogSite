@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import BlogCard from "../components/BlogCard";
+import BlogCard from "../UI/BlogCard";
 import classes from "../css/UserBlogs.module.css";
-import Loading from "../components/Loading";
+import Loading from "../UI/Loading";
 const UserBlogs = () => {
   const [blogs, setBlogs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

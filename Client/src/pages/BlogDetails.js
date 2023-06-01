@@ -3,8 +3,10 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "../css/CreateBlog.module.css";
-import Loading from "../components/Loading";
+import Loading from "../UI/Loading";
+import Overlay from "../components/Overlay";
 const BlogDetails = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [blog, setBlog] = useState({});
   const id = useParams().id;
   const navigate = useNavigate();
@@ -13,6 +15,7 @@ const BlogDetails = () => {
 
   // get blog details
   const getBlogDetail = async () => {
+    setIsLoading(true);
     try {
       const { data } = await axios.get(`/api/v1/blog/get-blog/${id}`);
       if (data?.success) {
@@ -22,6 +25,7 @@ const BlogDetails = () => {
           description: data?.blog.description,
           image: data?.blog.image,
         });
+        setIsLoading(false);
       }
     } catch (error) {
       console.log(error);
@@ -43,6 +47,7 @@ const BlogDetails = () => {
   // form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const { data } = await axios.put(`/api/v1/blog/update-blog/${id}`, {
         title: inputs.title,
@@ -53,52 +58,58 @@ const BlogDetails = () => {
       if (data?.success) {
         toast.success("Blog Updated");
         navigate("/my-blogs");
+        setIsLoading(false);
       }
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <div className={styles.CreateBlog}>
-      <form onSubmit={handleSubmit}>
-        <div className={styles.blogForm}>
-          <h2 className={styles.blogFormTitle}>Update A Post</h2>
-          <div className={styles.blogFormInput}>
-            <label htmlFor="title">Title</label>
-            <input
-              type="text"
-              name="title"
-              value={inputs.title}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className={styles.blogFormInput}>
-            <label htmlFor="description">Description</label>
-            <textarea
-              ref={descriptionRef}
-              name="description"
-              value={inputs.description}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className={styles.blogFormInput}>
-            <label htmlFor="image">Image URL</label>
-            <input
-              type="text"
-              name="image"
-              value={inputs.image}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <button type="submit" className={styles.blogFormSubmit}>
-            UPDATE
-          </button>
+    <>
+      {isLoading && <Loading />}
+      {!isLoading && (
+        <div className={styles.CreateBlog}>
+          <form onSubmit={handleSubmit}>
+            <div className={styles.blogForm}>
+              <h2 className={styles.blogFormTitle}>Update A Post</h2>
+              <div className={styles.blogFormInput}>
+                <label htmlFor="title">Title</label>
+                <input
+                  type="text"
+                  name="title"
+                  value={inputs.title}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className={styles.blogFormInput}>
+                <label htmlFor="description">Description</label>
+                <textarea
+                  ref={descriptionRef}
+                  name="description"
+                  value={inputs.description}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className={styles.blogFormInput}>
+                <label htmlFor="image">Image URL</label>
+                <input
+                  type="text"
+                  name="image"
+                  value={inputs.image}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <button type="submit" className={styles.blogFormSubmit}>
+                UPDATE
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
+      )}
+    </>
   );
 };
 

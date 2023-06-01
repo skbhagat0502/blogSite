@@ -10,31 +10,93 @@ import CreateBlog from "./pages/CreateBlog";
 import BlogDetails from "./pages/BlogDetails";
 import { Toaster } from "react-hot-toast";
 import BlogWithId from "./pages/BlogWithId";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
     <>
-      <Navbar />
-      <Toaster />
       <Routes>
         <Route
           exact
           path="/"
           element={
             <>
+              <Navbar />
+              <Toaster />
               <HomePage />
               <Blogs />
+              <Footer />
             </>
           }
         />
-        <Route path="/blog/:id" element={<BlogWithId />} />
-        <Route path="/my-blogs" element={<UserBlogs />} />
-        <Route path="/blog-details/:id" element={<BlogDetails />} />
-        <Route path="/create-blog" element={<CreateBlog />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/blog/:id"
+          element={
+            <>
+              <Navbar />
+              <Toaster />
+              <BlogWithId />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/my-blogs"
+          element={
+            <>
+              <Navbar />
+              <Toaster />
+              <UserBlogs />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/blog-details/:id"
+          element={
+            <>
+              <Navbar />
+              <Toaster />
+              <BlogDetails />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/create-blog"
+          element={
+            <>
+              <Navbar />
+              <Toaster />
+              <CreateBlog />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <>
+              <Navbar />
+              <Toaster />
+              <Login />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <>
+              <Navbar />
+              <Toaster />
+              <Register />
+              <Footer />
+            </>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer />
     </>
   );
 }
