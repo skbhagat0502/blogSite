@@ -27,9 +27,10 @@ const Blogs = () => {
       {isLoading && <Loading />}
       {!isLoading && (
         <div className={classes.blogSection}>
-          {blogs &&
+          {blogs.length > 0 &&
             blogs.map((blog) => (
               <BlogCard
+                key={blog._id}
                 id={blog?._id}
                 isUser={localStorage.getItem("userId") === blog?.user?._id}
                 title={blog?.title}

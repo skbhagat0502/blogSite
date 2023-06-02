@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BlogCard from "../UI/BlogCard";
-import classes from "../css/UserBlogs.module.css";
+import classes from "../css/Blogs.module.css";
 import Loading from "../UI/Loading";
 
 const UserBlogs = () => {
@@ -34,20 +34,19 @@ const UserBlogs = () => {
     <>
       {isLoading && <Loading />}
       {!isLoading && (
-        <div className={classes.myBlogs}>
+        <div className={classes.blogSection}>
           {blogs.length > 0 ? (
             blogs.map((blog) => (
-              <div key={blog._id} className={classes.myBlog}>
-                <BlogCard
-                  id={blog._id}
-                  isUser={true}
-                  title={blog.title}
-                  description={blog.description}
-                  image={blog.image}
-                  username={user.username}
-                  time={blog.createdAt}
-                />
-              </div>
+              <BlogCard
+                key={blog._id}
+                id={blog._id}
+                isUser={true}
+                title={blog.title}
+                description={blog.description}
+                image={blog.image}
+                username={user.username}
+                time={blog.createdAt}
+              />
             ))
           ) : (
             <h1>You have not created any blogs.</h1>

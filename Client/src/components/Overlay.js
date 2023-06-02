@@ -25,7 +25,7 @@ function Overlay({
     <Modal>
       <div className={styles.modal}>
         <h2>Are You Sure?</h2>
-        <p>Do you want to {message}</p>
+        <p>Do you want to {message}?</p>
         <Button onClick={handleOverlayToggle} className={styles.lg}>
           No
         </Button>
