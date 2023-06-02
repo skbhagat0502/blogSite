@@ -3,10 +3,13 @@ import axios from "axios";
 import BlogCard from "../UI/BlogCard";
 import classes from "../css/UserBlogs.module.css";
 import Loading from "../UI/Loading";
+
 const UserBlogs = () => {
   const [blogs, setBlogs] = useState([]);
+  const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  //get user blogs
+
+  // Get user blogs
   const getUserBlogs = async () => {
     setIsLoading(true);
     try {
@@ -14,35 +17,40 @@ const UserBlogs = () => {
       const { data } = await axios.get(`/api/v1/blog/user-blog/${id}`);
       if (data?.success) {
         setBlogs(data?.userBlog.blogs);
-        setIsLoading(false);
+        setUser(data?.userBlog);
       }
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
+
   useEffect(() => {
     getUserBlogs();
   }, []);
+
   return (
     <>
       {isLoading && <Loading />}
-
       {!isLoading && (
         <div className={classes.myBlogs}>
-          {blogs && blogs.length > 0 ? (
+          {blogs.length > 0 ? (
             blogs.map((blog) => (
-              <BlogCard
-                id={blog._id}
-                isUser={true}
-                title={blog.title}
-                description={blog.description}
-                image={blog.image}
-                username={blog.user.username}
-                time={blog.createdAt}
-              />
+              <div key={blog._id} className={classes.myBlog}>
+                <BlogCard
+                  id={blog._id}
+                  isUser={true}
+                  title={blog.title}
+                  description={blog.description}
+                  image={blog.image}
+                  username={user.username}
+                  time={blog.createdAt}
+                />
+              </div>
             ))
           ) : (
-            <h1>You Haven't Created a Blog</h1>
+            <h1>You have not created any blogs.</h1>
           )}
         </div>
       )}

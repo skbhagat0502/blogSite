@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "../css/CreateBlog.module.css";
 import classes from "../css/Option.module.css";
 import Loading from "../UI/Loading";
+import toast from "react-hot-toast";
 
 const CreateBlog = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -38,6 +39,7 @@ const CreateBlog = () => {
       });
       if (data?.success) {
         setIsLoading(false);
+        toast.success("Blog Created");
         navigate("/my-blogs");
       }
     } catch (error) {

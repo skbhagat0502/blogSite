@@ -23,8 +23,9 @@ function Navbar() {
     try {
       dispatch(authActions.logout());
       toast.success("Logout Successfully");
-      navigate("/");
+      window.location.reload();
       localStorage.clear();
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -53,14 +54,12 @@ function Navbar() {
                 </NavLink>
               )}
               {isLogin ? (
-                <NavLink to="/">
-                  <Button
-                    className="dark"
-                    onClick={() => handleOverlayToggle("logout")}
-                  >
-                    Logout
-                  </Button>
-                </NavLink>
+                <Button
+                  className="dark"
+                  onClick={() => handleOverlayToggle("logout")}
+                >
+                  Logout
+                </Button>
               ) : (
                 <NavLink to="/register">
                   <Button className="dark">Sign up</Button>

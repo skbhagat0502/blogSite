@@ -11,8 +11,11 @@ import BlogDetails from "./pages/BlogDetails";
 import { Toaster } from "react-hot-toast";
 import BlogWithId from "./pages/BlogWithId";
 import NotFound from "./pages/NotFound";
+import { useSelector } from "react-redux";
 
 function App() {
+  let isLogin =
+    useSelector((state) => state.isLogin) || localStorage.getItem("userId");
   return (
     <>
       <Routes>
@@ -40,39 +43,45 @@ function App() {
             </>
           }
         />
-        <Route
-          path="/my-blogs"
-          element={
-            <>
-              <Navbar />
-              <Toaster />
-              <UserBlogs />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/blog-details/:id"
-          element={
-            <>
-              <Navbar />
-              <Toaster />
-              <BlogDetails />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/create-blog"
-          element={
-            <>
-              <Navbar />
-              <Toaster />
-              <CreateBlog />
-              <Footer />
-            </>
-          }
-        />
+        {isLogin && (
+          <Route
+            path="/my-blogs"
+            element={
+              <>
+                <Navbar />
+                <Toaster />
+                <UserBlogs />
+                <Footer />
+              </>
+            }
+          />
+        )}
+        {isLogin && (
+          <Route
+            path="/blog-details/:id"
+            element={
+              <>
+                <Navbar />
+                <Toaster />
+                <BlogDetails />
+                <Footer />
+              </>
+            }
+          />
+        )}
+        {isLogin && (
+          <Route
+            path="/create-blog"
+            element={
+              <>
+                <Navbar />
+                <Toaster />
+                <CreateBlog />
+                <Footer />
+              </>
+            }
+          />
+        )}
         <Route
           path="/login"
           element={

@@ -12,11 +12,11 @@ exports.registerController = async (req, res) => {
       });
     }
     //exisiting user
-    const exisitingUser = await userModel.findOne({ email });
-    if (exisitingUser) {
-      return res.status(401).send({
+    const existingUser = await userModel.findOne({ email });
+    if (existingUser) {
+      return res.status(200).send({
         success: false,
-        message: "user already exisits",
+        message: "user already exists",
       });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -53,7 +53,7 @@ exports.getAllUsers = async (req, res) => {
     console.log(error);
     return res.status(500).send({
       success: false,
-      message: "Error In Get ALl Users",
+      message: "Error In Geting All Users",
       error,
     });
   }
@@ -82,7 +82,7 @@ exports.loginController = async (req, res) => {
     if (!isMatch) {
       return res.status(401).send({
         success: false,
-        message: "Invlid username or password",
+        message: "Invalid username or password",
       });
     }
     return res.status(200).send({
@@ -94,7 +94,7 @@ exports.loginController = async (req, res) => {
     console.log(error);
     return res.status(500).send({
       success: false,
-      message: "Error In Login Callcback",
+      message: "Error In Login Callback",
       error,
     });
   }

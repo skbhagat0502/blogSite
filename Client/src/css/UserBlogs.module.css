@@ -1,5 +1,5 @@
 .myBlogs {
-  display: flex;
+  display: grid;
   margin: 2rem 0;
-  flex-wrap: wrap;
+  place-items: center;
 }
