@@ -10,7 +10,7 @@ function BlogWithCategory() {
   const [isLoading, setIsLoading] = useState(false);
   const [blogs, setBlogs] = useState([]);
 
-  const { category } = useParams();
+  const category = useParams().category;
 
   const getBlogs = async () => {
     setIsLoading(true);
@@ -49,7 +49,7 @@ function BlogWithCategory() {
               />
             ))
           ) : (
-            <h2>No blogs found in this category.</h2>
+            <h2 className={classes.h}>No blogs found in this category.</h2>
           )}
         </div>
       )}

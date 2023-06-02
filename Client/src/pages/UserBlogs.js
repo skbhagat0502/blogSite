@@ -49,7 +49,7 @@ const UserBlogs = () => {
               />
             ))
           ) : (
-            <h1>You have not created any blogs.</h1>
+            <h1 className={classes.h}>You have not created any blogs.</h1>
           )}
         </div>
       )}

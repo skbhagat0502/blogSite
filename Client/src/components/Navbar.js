@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import classes from "../css/Navbar.module.css";
 import Button from "../UI/Button";
 import Overlay from "./Overlay";
+import styles from "../css/Option.module.css";
 
 function Navbar() {
   const [showOverlay, setShowOverlay] = useState(false);
@@ -34,7 +35,9 @@ function Navbar() {
     setShowOverlay((prevShowOverlay) => !prevShowOverlay);
     setOverlayMessage(message);
   };
-
+  const handleChange = (event) => {
+    navigate(`/${event.target.value}`);
+  };
   return (
     <nav className={`${classes.navbar} ${showMenu ? classes.showMenu : ""}`}>
       <>
@@ -42,6 +45,23 @@ function Navbar() {
           <li className={classes.brand}>
             <NavLink to="/">SiteName</NavLink>
           </li>
+          <div className={styles["option-container"]}>
+            <select
+              className={styles["option-input"]}
+              name="category"
+              onChange={handleChange}
+            >
+              <option value="">Select category</option>
+              <option value="news">NEWS</option>
+              <option value="politics">POLITICS</option>
+              <option value="entertainment">ENTERTAINMENT</option>
+              <option value="personal">PERSONAL</option>
+              <option value="life">LIFE</option>
+              <option value="voices">VOICES</option>
+              <option value="shopping">SHOPPING</option>
+              <option value="video">VIDEO</option>
+            </select>
+          </div>
           {!showMenu && (
             <span className={classes.box}>
               {isLogin ? (
