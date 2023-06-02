@@ -1,3 +1,62 @@
-node_modules
+# Ignore compiled and binary files
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
 
+# Ignore IDE and editor files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore build output
+/target/
+/build/
+/dist/
+
+# Ignore logs and temporary files
+*.log
+*.bak
+*.tmp
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore dependency directories
+/node_modules/
+/bower_components/
+
+# Ignore specific file types
+*.pdf
+*.swp
+*.swo
+
+# Exclude sensitive or environment-specific information
+secrets.conf
+config.ini
 .env
+
+# Exclude generated documentation
+/doc/
+
+# Exclude personal or user-specific files
+*.personal
+
+# Exclude backup files
+*.backup
+*.bak
+*.bkp
+
+# Exclude cache and temporary files
+.cache/
+*.cache
+*.tmp
+
+# Exclude image thumbnails
+thumbs.db
+*.thumbnails/
