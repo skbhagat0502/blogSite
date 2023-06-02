@@ -6,6 +6,7 @@ const {
   getBlogByIdController,
   deleteBlogController,
   userBlogControlller,
+  categoryBlogControlller,
 } = require("../controllers/blogControlller");
 
 //router object
@@ -14,6 +15,8 @@ const router = express.Router();
 //routes
 // GET || all blogs
 router.get("/all-blog", getAllBlogsController);
+// GET || category blogs
+router.get("/:category", categoryBlogControlller);
 
 //POST || create blog
 router.post("/create-blog", createBlogController);

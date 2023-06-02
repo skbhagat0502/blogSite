@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const blogSchema = new mongoose.Schema(
   {
+    category: {
+      type: String,
+      require: [true, "category is required"],
+    },
     title: {
       type: String,
       require: [true, "title is required"],

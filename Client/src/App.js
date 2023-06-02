@@ -12,6 +12,7 @@ import { Toaster } from "react-hot-toast";
 import BlogWithId from "./pages/BlogWithId";
 import NotFound from "./pages/NotFound";
 import { useSelector } from "react-redux";
+import BlogWithCategory from "./pages/BlogWithCategory";
 
 function App() {
   let isLogin =
@@ -100,6 +101,17 @@ function App() {
               <Navbar />
               <Toaster />
               <Register />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/:category"
+          element={
+            <>
+              <Navbar />
+              <Toaster />
+              <BlogWithCategory />
               <Footer />
             </>
           }

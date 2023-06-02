@@ -32,6 +32,7 @@ const CreateBlog = () => {
     setIsLoading(true);
     try {
       const { data } = await axios.post("/api/v1/blog/create-blog", {
+        category: inputs.category,
         title: inputs.title,
         description: inputs.description,
         image: inputs.image,
@@ -59,8 +60,9 @@ const CreateBlog = () => {
                 <div className={classes["option-container"]}>
                   <select
                     className={classes["option-input"]}
-                    value={selectedOption}
-                    onChange={handleOptionChange}
+                    name="category"
+                    value={inputs.category}
+                    onChange={handleChange}
                   >
                     <option value="">Select category</option>
                     <option value="news">NEWS</option>

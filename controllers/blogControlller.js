@@ -31,9 +31,9 @@ exports.getAllBlogsController = async (req, res) => {
 //Create Blog
 exports.createBlogController = async (req, res) => {
   try {
-    const { title, description, image, user } = req.body;
+    const { category, title, description, image, user } = req.body;
     //validation
-    if (!title || !description || !image || !user) {
+    if (!category || !title || !description || !image || !user) {
       return res.status(400).send({
         success: false,
         message: "Please Provide ALl Fields",
@@ -48,7 +48,13 @@ exports.createBlogController = async (req, res) => {
       });
     }
 
-    const newBlog = new blogModel({ title, description, image, user });
+    const newBlog = new blogModel({
+      category,
+      title,
+      description,
+      image,
+      user,
+    });
     const session = await mongoose.startSession();
     session.startTransaction();
     await newBlog.save({ session });
@@ -75,7 +81,7 @@ exports.createBlogController = async (req, res) => {
 exports.updateBlogController = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, image } = req.body;
+    const { category, title, description, image } = req.body;
     const blog = await blogModel.findByIdAndUpdate(
       id,
       { ...req.body },
@@ -96,7 +102,7 @@ exports.updateBlogController = async (req, res) => {
   }
 };
 
-//SIngle Blog
+//Single Blog
 exports.getBlogByIdController = async (req, res) => {
   try {
     const { id } = req.params;
@@ -165,6 +171,33 @@ exports.userBlogControlller = async (req, res) => {
     return res.status(400).send({
       success: false,
       message: "error in user blog",
+      error,
+    });
+  }
+};
+//Get Blogs by category
+exports.categoryBlogControlller = async (req, res) => {
+  try {
+    const { category } = req.params;
+    const categoryBlogs = await blogModel.find({ category }).populate("user");
+
+    if (!categoryBlogs || categoryBlogs.length === 0) {
+      return res.status(404).send({
+        success: false,
+        message: "No blogs found with this category.",
+      });
+    }
+
+    return res.status(200).send({
+      success: true,
+      message: "Blogs with the category",
+      categoryBlogs,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({
+      success: false,
+      message: "Error in fetching blogs",
       error,
     });
   }
