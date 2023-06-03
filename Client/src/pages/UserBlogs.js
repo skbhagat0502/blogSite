@@ -36,18 +36,21 @@ const UserBlogs = () => {
       {!isLoading && (
         <div className={classes.blogSection}>
           {blogs.length > 0 ? (
-            blogs.map((blog) => (
-              <BlogCard
-                key={blog._id}
-                id={blog._id}
-                isUser={true}
-                title={blog.title}
-                description={blog.description}
-                image={blog.image}
-                username={user.username}
-                time={blog.createdAt}
-              />
-            ))
+            blogs
+              .slice()
+              .reverse()
+              .map((blog) => (
+                <BlogCard
+                  key={blog._id}
+                  id={blog._id}
+                  isUser={true}
+                  title={blog.title}
+                  description={blog.description}
+                  image={blog.image}
+                  username={user.username}
+                  time={blog.createdAt}
+                />
+              ))
           ) : (
             <h1 className={classes.h}>You have not created any blogs.</h1>
           )}

@@ -83,47 +83,45 @@ export default function BlogCardWithId({
   };
   return (
     <>
-      <Card
+      <Box
         sx={{
-          width: "30%",
-          margin: "0.5rem auto",
-          padding: 2,
+          width: "80%",
+          margin: "2rem auto",
           boxShadow: "5px 5px 10px #ccc",
-          ":hover:": {
-            boxShadow: "10px 10px 20px #ccc",
-          },
+          padding: 2,
         }}
         className={classes.blogCard}
       >
-        <CardHeader
-          avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              {defaultProfile}
-            </Avatar>
-          }
-          title={username}
-          subheader={formattedDate}
+        <Typography variant="h4" component="h1" sx={{ marginBottom: 2 }}>
+          {title}
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          color="text.secondary"
+          sx={{ marginBottom: 2 }}
+        >
+          By {username} - {formattedDate}
+        </Typography>
+        <img
+          src={image}
+          alt="Blog"
+          style={{
+            width: "100%",
+            maxHeight: "500px",
+            objectFit: "cover",
+            marginBottom: "1rem",
+          }}
         />
-        <CardMedia
-          component="img"
-          height="194"
-          image={image}
-          alt="Paella dish"
-        />
-        <CardContent>
-          <Typography variant="h6" color="text.secondary">
-            {title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {description}
-          </Typography>
-        </CardContent>
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ marginBottom: 2 }}
+        >
+          {description}
+        </Typography>
         {isUser && (
-          <Box display={"flex"}>
-            <IconButton
-              onClick={() => handleOverlayToggle("update")}
-              sx={{ marginLeft: "auto" }}
-            >
+          <Box display={"flex"} justifyContent="flex-end">
+            <IconButton onClick={() => handleOverlayToggle("update")}>
               <ModeEditIcon color="info" />
             </IconButton>
             <IconButton onClick={() => handleOverlayToggle("delete")}>
@@ -131,7 +129,7 @@ export default function BlogCardWithId({
             </IconButton>
           </Box>
         )}
-      </Card>
+      </Box>
       {showOverlay && (
         <Overlay
           handleDelete={handleDelete}

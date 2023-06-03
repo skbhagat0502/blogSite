@@ -95,6 +95,9 @@ function Navbar() {
         </ul>
         <ul className={classes.mainnav}>
           <li>
+            <NavLink to="/">All</NavLink>
+          </li>
+          <li>
             <NavLink to="../news">NEWS</NavLink>
           </li>
           <li>

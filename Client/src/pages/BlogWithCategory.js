@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import BlogCard from "../UI/BlogCardWithId";
+import BlogCard from "../UI/BlogCard";
 import Loading from "../UI/Loading";
 import classes from "../css/Blogs.module.css";
 
@@ -34,24 +34,32 @@ function BlogWithCategory() {
     <>
       {isLoading && <Loading />}
       {!isLoading && (
-        <div className={classes.blogSection}>
-          {blogs && blogs.length > 0 ? (
-            blogs.map((blog) => (
-              <BlogCard
-                key={blog._id}
-                id={blog?._id}
-                isUser={localStorage.getItem("userId") === blog?.user?._id}
-                title={blog?.title}
-                description={blog?.description}
-                image={blog?.image}
-                username={blog?.user?.username}
-                time={blog.createdAt}
-              />
-            ))
-          ) : (
-            <h2 className={classes.h}>No blogs found in this category.</h2>
+        <>
+          {blogs && blogs.length > 0 && (
+            <h2 className={classes.hc}>Most Popular from {category}</h2>
           )}
-        </div>
+          <div className={classes.blogSection}>
+            {blogs && blogs.length > 0 ? (
+              blogs
+                .slice()
+                .reverse()
+                .map((blog) => (
+                  <BlogCard
+                    key={blog._id}
+                    id={blog?._id}
+                    isUser={localStorage.getItem("userId") === blog?.user?._id}
+                    title={blog?.title}
+                    description={blog?.description}
+                    image={blog?.image}
+                    username={blog?.user?.username}
+                    time={blog.createdAt}
+                  />
+                ))
+            ) : (
+              <h2 className={classes.h}>No blogs found in this category.</h2>
+            )}
+          </div>
+        </>
       )}
     </>
   );

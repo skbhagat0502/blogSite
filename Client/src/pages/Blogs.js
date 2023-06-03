@@ -26,21 +26,27 @@ const Blogs = () => {
     <>
       {isLoading && <Loading />}
       {!isLoading && (
-        <div className={classes.blogSection}>
-          {blogs.length > 0 &&
-            blogs.map((blog) => (
-              <BlogCard
-                key={blog._id}
-                id={blog?._id}
-                isUser={localStorage.getItem("userId") === blog?.user?._id}
-                title={blog?.title}
-                description={blog?.description}
-                image={blog?.image}
-                username={blog?.user?.username}
-                time={blog.createdAt}
-              />
-            ))}
-        </div>
+        <>
+          <h2 className={classes.hc}>Recent Blogs</h2>
+          <div className={classes.blogSection}>
+            {blogs.length > 0 &&
+              blogs
+                .slice()
+                .reverse()
+                .map((blog) => (
+                  <BlogCard
+                    key={blog._id}
+                    id={blog?._id}
+                    isUser={localStorage.getItem("userId") === blog?.user?._id}
+                    title={blog?.title}
+                    description={blog?.description}
+                    image={blog?.image}
+                    username={blog?.user?.username}
+                    time={blog.createdAt}
+                  />
+                ))}
+          </div>
+        </>
       )}
     </>
   );
