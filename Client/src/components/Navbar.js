@@ -25,6 +25,7 @@ function Navbar() {
       dispatch(authActions.logout());
       toast.success("Logout Successfully");
       localStorage.clear();
+      window.location.reload();
       navigate("/");
     } catch (error) {
       console.log(error);

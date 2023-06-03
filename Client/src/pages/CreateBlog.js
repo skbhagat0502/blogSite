@@ -104,7 +104,7 @@ const CreateBlog = () => {
               <div className={styles.blogFormInput}>
                 <label htmlFor="description">Description</label>
                 <Editor
-                  apiKey="m60ptnnd82affrzam6d8y0w947f6ji628xdtqw4y07bqkqya"
+                  apiKey={process.env.TINY_MCE_KEY}
                   ref={descriptionRef}
                   name="description"
                   initialValue="write your blog here..."
