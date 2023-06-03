@@ -2,7 +2,7 @@
 .blogForm {
   display: flex;
   flex-direction: column;
-  width: 500px;
+  max-width: 90%;
   margin: 3rem auto;
   padding: 20px;
   background-color: #f7f7f7;
@@ -35,8 +35,8 @@
 }
 
 .blogFormInput textarea {
-  height: 150px;
-  resize: vertical;
+  height: 120px;
+  resize: none;
 }
 
 .blogFormSubmit {

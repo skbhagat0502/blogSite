@@ -45,6 +45,7 @@ const UserBlogs = () => {
                   id={blog._id}
                   isUser={true}
                   title={blog.title}
+                  displayContent={blog.displayContent}
                   description={blog.description}
                   image={blog.image}
                   username={user.username}

@@ -19,6 +19,7 @@ import Overlay from "../components/Overlay";
 
 export default function BlogCard({
   title,
+  displayContent,
   description,
   image,
   username,
@@ -72,7 +73,6 @@ export default function BlogCard({
       const { data } = await axios.delete(`/api/v1/blog/delete-blog/${id}`);
       if (data?.success) {
         toast.success("Blog Deleted");
-        window.location.reload();
       }
     } catch (error) {
       console.log(error);
@@ -82,6 +82,7 @@ export default function BlogCard({
     setShowOverlay((prevShowOverlay) => !prevShowOverlay);
     setOverlayMessage(message);
   };
+
   return (
     <>
       <Card
@@ -116,7 +117,7 @@ export default function BlogCard({
             {title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {description.substring(0, 200) + "..."}
+            {displayContent && displayContent.substring(0, 200)}
           </Typography>
           <NavLink to={`/blog/${id}`}>
             <Button className="dark mrt">Read More</Button>

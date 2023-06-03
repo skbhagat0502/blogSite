@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import styles from "../css/CreateBlog.module.css";
 import Loading from "../UI/Loading";
 import Overlay from "../components/Overlay";
+import { Editor } from "@tinymce/tinymce-react";
 const BlogDetails = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [blog, setBlog] = useState({});
@@ -12,6 +13,7 @@ const BlogDetails = () => {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({});
   const descriptionRef = useRef(null);
+  const displayContentRef = useRef(null);
 
   // get blog details
   const getBlogDetail = async () => {
@@ -22,6 +24,7 @@ const BlogDetails = () => {
         setBlog(data?.blog);
         setInputs({
           title: data?.blog.title,
+          displayContent: data?.blog.displayContent,
           description: data?.blog.description,
           image: data?.blog.image,
         });
@@ -51,6 +54,7 @@ const BlogDetails = () => {
     try {
       const { data } = await axios.put(`/api/v1/blog/update-blog/${id}`, {
         title: inputs.title,
+        displayContent: inputs.displayContent,
         description: inputs.description,
         image: inputs.image,
         user: id,
@@ -83,13 +87,48 @@ const BlogDetails = () => {
                 />
               </div>
               <div className={styles.blogFormInput}>
-                <label htmlFor="description">Description</label>
+                <label htmlFor="displayContent">Important Content</label>
                 <textarea
+                  type="text"
+                  ref={displayContentRef}
+                  name="displayContent"
+                  value={inputs.displayContent}
+                  onChange={handleChange}
+                  max={300}
+                  min={200}
+                  required
+                />
+              </div>
+              <div className={styles.blogFormInput}>
+                <label htmlFor="description">Description</label>
+                <Editor
+                  apiKey="m60ptnnd82affrzam6d8y0w947f6ji628xdtqw4y07bqkqya"
                   ref={descriptionRef}
                   name="description"
                   value={inputs.description}
-                  onChange={handleChange}
                   required
+                  onEditorChange={(content) =>
+                    setInputs((prevState) => ({
+                      ...prevState,
+                      description: content,
+                    }))
+                  }
+                  init={{
+                    height: 500,
+                    menubar: false,
+                    plugins: [
+                      "advlist autolink lists link image charmap print preview anchor",
+                      "searchreplace visualblocks code fullscreen",
+                      "insertdatetime media table paste code help wordcount",
+                    ],
+                    toolbar:
+                      "undo redo | formatselect | " +
+                      "bold italic backcolor | alignleft aligncenter " +
+                      "alignright alignjustify | bullist numlist outdent indent | " +
+                      "removeformat | help",
+                    content_style:
+                      "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                  }}
                 />
               </div>
               <div className={styles.blogFormInput}>

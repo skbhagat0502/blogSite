@@ -31,12 +31,20 @@ exports.getAllBlogsController = async (req, res) => {
 //Create Blog
 exports.createBlogController = async (req, res) => {
   try {
-    const { category, title, description, image, user } = req.body;
+    const { category, title, displayContent, description, image, user } =
+      req.body;
     //validation
-    if (!category || !title || !description || !image || !user) {
+    if (
+      !category ||
+      !title ||
+      !displayContent ||
+      !description ||
+      !image ||
+      !user
+    ) {
       return res.status(400).send({
         success: false,
-        message: "Please Provide ALl Fields",
+        message: "Please Provide All Fields",
       });
     }
     const exisitingUser = await userModel.findById(user);
@@ -51,6 +59,7 @@ exports.createBlogController = async (req, res) => {
     const newBlog = new blogModel({
       category,
       title,
+      displayContent,
       description,
       image,
       user,
@@ -71,7 +80,7 @@ exports.createBlogController = async (req, res) => {
     console.log(error);
     return res.status(400).send({
       success: false,
-      message: "Error WHile Creting blog",
+      message: "Error While Creting blog",
       error,
     });
   }
@@ -81,7 +90,7 @@ exports.createBlogController = async (req, res) => {
 exports.updateBlogController = async (req, res) => {
   try {
     const { id } = req.params;
-    const { category, title, description, image } = req.body;
+    const { category, title, displayContent, description, image } = req.body;
     const blog = await blogModel.findByIdAndUpdate(
       id,
       { ...req.body },
@@ -110,7 +119,7 @@ exports.getBlogByIdController = async (req, res) => {
     if (!blog) {
       return res.status(404).send({
         success: false,
-        message: "blog not found with this is",
+        message: "blog not found with this id",
       });
     }
     return res.status(200).send({

@@ -5,6 +5,7 @@ import styles from "../css/CreateBlog.module.css";
 import classes from "../css/Option.module.css";
 import Loading from "../UI/Loading";
 import toast from "react-hot-toast";
+import { Editor } from "@tinymce/tinymce-react";
 
 const CreateBlog = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,10 +14,13 @@ const CreateBlog = () => {
   const id = localStorage.getItem("userId");
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
+    category: "",
     title: "",
+    displayContent: "",
     description: "",
     image: "",
   });
+  const displayContentRef = useRef();
   const descriptionRef = useRef();
 
   // input change
@@ -34,6 +38,7 @@ const CreateBlog = () => {
       const { data } = await axios.post("/api/v1/blog/create-blog", {
         category: inputs.category,
         title: inputs.title,
+        displayContent: inputs.displayContent,
         description: inputs.description,
         image: inputs.image,
         user: id,
@@ -82,16 +87,51 @@ const CreateBlog = () => {
                   value={inputs.title}
                   onChange={handleChange}
                   required
+                  max={50}
+                />
+                <label htmlFor="mainContent">Important Content</label>
+                <textarea
+                  type="text"
+                  ref={displayContentRef}
+                  name="displayContent"
+                  value={inputs.displayContent}
+                  onChange={handleChange}
+                  max={300}
+                  min={200}
+                  required
                 />
               </div>
               <div className={styles.blogFormInput}>
                 <label htmlFor="description">Description</label>
-                <textarea
+                <Editor
+                  apiKey="m60ptnnd82affrzam6d8y0w947f6ji628xdtqw4y07bqkqya"
                   ref={descriptionRef}
                   name="description"
+                  initialValue="write your blog here..."
                   value={inputs.description}
-                  onChange={handleChange}
                   required
+                  onEditorChange={(content) =>
+                    setInputs((prevState) => ({
+                      ...prevState,
+                      description: content,
+                    }))
+                  }
+                  init={{
+                    height: 500,
+                    menubar: false,
+                    plugins: [
+                      "advlist autolink lists link image charmap print preview anchor",
+                      "searchreplace visualblocks code fullscreen",
+                      "insertdatetime media table paste code help wordcount",
+                    ],
+                    toolbar:
+                      "undo redo | formatselect | " +
+                      "bold italic backcolor | alignleft aligncenter " +
+                      "alignright alignjustify | bullist numlist outdent indent | " +
+                      "removeformat | help",
+                    content_style:
+                      "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                  }}
                 />
               </div>
               <div className={styles.blogFormInput}>
@@ -105,7 +145,7 @@ const CreateBlog = () => {
                 />
               </div>
               <button type="submit" className={styles.blogFormSubmit}>
-                SUBMIT
+                PUBLISH
               </button>
             </div>
           </form>

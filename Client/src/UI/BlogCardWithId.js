@@ -17,6 +17,7 @@ import toast from "react-hot-toast";
 
 export default function BlogCardWithId({
   title,
+  displayContent,
   description,
   image,
   username,
@@ -117,8 +118,14 @@ export default function BlogCardWithId({
           color="text.secondary"
           sx={{ marginBottom: 2 }}
         >
-          {description}
+          {displayContent}
         </Typography>
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ marginBottom: 2 }}
+          dangerouslySetInnerHTML={{ __html: description }}
+        />
         {isUser && (
           <Box display={"flex"} justifyContent="flex-end">
             <IconButton onClick={() => handleOverlayToggle("update")}>
