@@ -33,7 +33,7 @@ app.use("/api/v1/blog", blogRoutes);
 app.use(nodeMailer);
 
 // Port
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5000;
 
 // Start the server
 app.listen(PORT, () => {
